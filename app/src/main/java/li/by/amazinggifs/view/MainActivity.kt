@@ -2,32 +2,32 @@ package li.by.amazinggifs.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.fragment.app.transaction
 import li.by.amazinggifs.R
 import li.by.amazinggifs.model.Gif
-import li.by.amazinggifs.viewmodel.MainActivityViewModel
+import li.by.amazinggifs.view.fragments.DetailGifFragment
+import li.by.amazinggifs.view.fragments.GifsFragment
 
-class MainActivity : AppCompatActivity() {
+
+interface ShowGifDetailListener{
+    fun onShowGif(gif: Gif)
+}
+
+class MainActivity : AppCompatActivity(), ShowGifDetailListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-        val adapter = GifsAdapter(this)
+        supportFragmentManager.transaction {
+            replace(R.id.container, GifsFragment())
+        }
+    }
 
-
-        recyclerViewGifs.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerViewGifs.adapter = adapter
-
-        model.nextGifs(0)
-        model.gifs.observe(this, Observer {
-            it?.let { itList: List<Gif> ->
-                adapter.gifs = ArrayList(itList)
-            }
-        })
+    override fun onShowGif(gif: Gif) {
+        supportFragmentManager.transaction {
+            replace(R.id.container, DetailGifFragment.newInstance(gif))
+            addToBackStack(null)
+        }
     }
 }

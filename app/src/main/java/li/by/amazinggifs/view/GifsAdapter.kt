@@ -13,6 +13,7 @@ import li.by.amazinggifs.R
 import li.by.amazinggifs.model.FIXED_WIDTH
 import li.by.amazinggifs.model.Gif
 import li.by.amazinggifs.utils.getRandomHSVColor
+import li.by.amazinggifs.utils.loadGif
 
 
 class GifsAdapter(val context: Context) : RecyclerView.Adapter<GifsAdapter.MyViewHolder>() {
@@ -49,10 +50,7 @@ class GifsAdapter(val context: Context) : RecyclerView.Adapter<GifsAdapter.MyVie
         )
         holder.imageView.layoutParams.height = px.toInt()
 
-        Glide.with(context)
-            .load(gifs[position].images.fixedWidth.url)
-            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
-            .into(holder.imageView)
+        holder.imageView.loadGif( gifs[position].images.fixedWidth.url, context)
     }
 
 

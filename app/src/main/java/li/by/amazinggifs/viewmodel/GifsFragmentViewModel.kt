@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import li.by.amazinggifs.model.GifsRepository
 
 
-class MainActivityViewModel : ViewModel() {
+class GifsFragmentViewModel : ViewModel() {
 
     val gifs = GifsRepository.gifs
 

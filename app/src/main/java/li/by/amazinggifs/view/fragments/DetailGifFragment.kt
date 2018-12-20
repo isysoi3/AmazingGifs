@@ -1,4 +1,4 @@
-package li.by.amazinggifs.view
+package li.by.amazinggifs.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.fragment_detail_gif.*
 import li.by.amazinggifs.R
 import li.by.amazinggifs.model.Gif
+import li.by.amazinggifs.utils.loadGif
 import li.by.amazinggifs.viewmodel.DetailGifFragmentViewModel
 
 
@@ -29,6 +31,9 @@ class DetailGifFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val model =  ViewModelProviders.of(this).get(DetailGifFragmentViewModel::class.java)
-        val gif = savedInstanceState?.get(GIF_KEY) as Gif
+        val gif = arguments?.get(GIF_KEY) as? Gif
+        gif?.let {
+            imageDetail.loadGif(gif.images.fixedWidth.url, context!!)
+        }
     }
 }
