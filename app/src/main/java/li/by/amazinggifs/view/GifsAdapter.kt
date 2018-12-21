@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import li.by.amazinggifs.R
 import li.by.amazinggifs.model.FIXED_WIDTH
 import li.by.amazinggifs.model.Gif
@@ -44,13 +41,13 @@ class GifsAdapter(val context: Context) : RecyclerView.Adapter<GifsAdapter.MyVie
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val height = gifs[position].images.fixedWidth.height
         val px = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            height * screenWidthDP / (2 * FIXED_WIDTH),
-            context.resources.displayMetrics
+                TypedValue.COMPLEX_UNIT_DIP,
+                height * screenWidthDP / (2 * FIXED_WIDTH),
+                context.resources.displayMetrics
         )
         holder.imageView.layoutParams.height = px.toInt()
 
-        holder.imageView.loadGif( gifs[position].images.fixedWidth.url, context)
+        holder.imageView.loadGif(gifs[position].images.fixedWidth.url, context)
     }
 
 

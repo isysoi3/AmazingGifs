@@ -7,6 +7,9 @@ import li.by.amazinggifs.R
 import li.by.amazinggifs.model.Gif
 import li.by.amazinggifs.view.fragments.DetailGifFragment
 import li.by.amazinggifs.view.fragments.GifsFragment
+import li.by.amazinggifs.model.database.AppDatabase
+import androidx.room.Room
+import li.by.amazinggifs.model.database.GifDatabaseModel
 
 
 interface ShowGifDetailListener{
