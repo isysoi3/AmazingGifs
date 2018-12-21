@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import kotlinx.android.synthetic.main.fragment_favourite.*
 import kotlinx.android.synthetic.main.fragment_gifs.*
 import li.by.amazinggifs.R
 import li.by.amazinggifs.model.Gif
@@ -18,11 +21,11 @@ import li.by.amazinggifs.view.ShowGifDetailListener
 import li.by.amazinggifs.viewmodel.GifsFragmentViewModel
 
 
-class GifsFragment : Fragment(){
-    private var showGifDetailListener : ShowGifDetailListener? = null
+class GifsFragment : Fragment() {
+    private var showGifDetailListener: ShowGifDetailListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
-         = inflater.inflate(R.layout.fragment_gifs, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+        inflater.inflate(R.layout.fragment_gifs, container, false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,19 +40,31 @@ class GifsFragment : Fragment(){
         recyclerViewGifs.adapter = adapter
 
         recyclerViewGifs.addOnItemTouchListener(object : RecyclerItemClickListener(context!!,
-            recyclerViewGifs ,object : RecyclerItemClickListener.OnItemClickListener {
+            recyclerViewGifs, object : RecyclerItemClickListener.OnItemClickListener {
                 override fun onItemClick(view: View, position: Int) {
                     showGifDetailListener?.onShowGif(adapter.gifs[position])
                 }
 
-                override fun onLongItemClick(view: View?, position: Int) { }
+                override fun onLongItemClick(view: View?, position: Int) {}
 
             }) {})
 
         model.nextGifs(0)
         model.gifs.observe(this, Observer {
+            model.loading = false
             it?.let { itList: List<Gif> ->
                 adapter.gifs = ArrayList(itList)
+            }
+        })
+
+        recyclerViewGifs.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerViewGifs.canScrollVertically(1)) {
+                    if(!model.loading){
+                        model.nextGifs(adapter.gifs.size)
+                    }
+                }
             }
         })
     }

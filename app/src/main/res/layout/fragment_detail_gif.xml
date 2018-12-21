@@ -17,4 +17,10 @@
             android:src="@drawable/ic_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+    <ImageView
+            android:id="@+id/imageViewShare"
+            android:src="@drawable/ic_share"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
 </LinearLayout>
