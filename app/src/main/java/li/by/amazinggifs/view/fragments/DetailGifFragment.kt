@@ -1,6 +1,7 @@
 package li.by.amazinggifs.view.fragments
 
 import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +59,14 @@ class DetailGifFragment : Fragment() {
                 viewModel.addToFavorites()
                 imageButtonStar.setColorFilter(Color.RED)
 
-            }
+
+        imageViewShare.setOnClickListener {
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            val toShare = "Look at gif : ${gif?.images?.fixedWidth?.url}"
+            sendIntent.putExtra(Intent.EXTRA_TEXT, toShare)
+            sendIntent.type = "text/plain"
+            context!!.startActivity(sendIntent)
         }
     }
 }
