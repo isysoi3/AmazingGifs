@@ -16,8 +16,6 @@ object GifsDataBaseRepository {
         AppDatabase.getInstance(applicationContext)?.gifDao()?.delete(gif)
     }
 
-    private var mediatorLiveData = MediatorLiveData<List<GifDatabaseModel>>()
-
     fun getAllGifs(): List<GifDatabaseModel> {
         return AppDatabase.getInstance(applicationContext)?.gifDao()?.getAllGifs()!!
     }
