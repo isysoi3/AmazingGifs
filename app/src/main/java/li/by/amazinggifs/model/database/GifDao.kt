@@ -17,6 +17,6 @@ public interface GifDao {
     fun delete(gif: GifDatabaseModel)
 
     @Query("SELECT * FROM gif")
-    fun getAllGifs(): LiveData<GifDatabaseModel>
+    fun getAllGifs(): List<GifDatabaseModel>
 
 }
