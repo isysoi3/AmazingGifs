@@ -1,7 +1,6 @@
 package li.by.amazinggifs.model
 
 import androidx.lifecycle.LiveData
-import com.bumptech.glide.util.Util
 import li.by.amazinggifs.model.database.AppDatabase
 import li.by.amazinggifs.model.database.GifDatabaseModel
 import li.by.amazinggifs.utils.applicationContext
