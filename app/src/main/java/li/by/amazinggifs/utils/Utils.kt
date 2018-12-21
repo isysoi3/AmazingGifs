@@ -6,6 +6,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import li.by.amazinggifs.GifsApplication
 import java.util.*
 
 
@@ -25,3 +26,5 @@ fun ImageView.loadGif(url:String, ctx: Context){
         .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
         .into(this)
 }
+
+val applicationContext = GifsApplication.application
