@@ -8,7 +8,7 @@ import androidx.room.Query
 
 
 @Dao
-public interface GifDao {
+interface GifDao {
 
     @Insert
     fun insert(gif: GifDatabaseModel)
@@ -17,6 +17,6 @@ public interface GifDao {
     fun delete(gif: GifDatabaseModel)
 
     @Query("SELECT * FROM gif")
-    fun getAllGifs(): List<GifDatabaseModel>
+    fun getAllGifs(): LiveData<List<GifDatabaseModel>>
 
 }
