@@ -1,4 +1,4 @@
-package li.by.amazinggifs.view
+package li.by.amazinggifs.view.adapters
 
 import android.content.Context
 import android.util.TypedValue
@@ -41,9 +41,9 @@ class GifsAdapter(val context: Context) : RecyclerView.Adapter<GifsAdapter.MyVie
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val height = gifs[position].images.fixedWidth.height
         val px = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                height * screenWidthDP / (2 * FIXED_WIDTH),
-                context.resources.displayMetrics
+            TypedValue.COMPLEX_UNIT_DIP,
+            height * screenWidthDP / (2 * FIXED_WIDTH),
+            context.resources.displayMetrics
         )
         holder.imageView.layoutParams.height = px.toInt()
 

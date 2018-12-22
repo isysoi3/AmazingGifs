@@ -1,10 +1,9 @@
 package li.by.amazinggifs.model.database
 
 import android.content.Context
-import androidx.room.RoomDatabase
 import androidx.room.Database
 import androidx.room.Room
-import okhttp3.internal.Internal.instance
+import androidx.room.RoomDatabase
 
 
 @Database(entities = arrayOf(GifDatabaseModel::class), version = 1, exportSchema = false)
@@ -20,16 +19,16 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase? {
             if (instance == null) {
                 synchronized(AppDatabase::class.java) {
-                    instance = Room.databaseBuilder(context,
-                            AppDatabase::class.java,
-                            DATABASE_NAME)
-                            .allowMainThreadQueries()
-                            .build()
+                    instance = Room.databaseBuilder(
+                        context,
+                        AppDatabase::class.java,
+                        DATABASE_NAME
+                    )
+                        .allowMainThreadQueries()
+                        .build()
                 }
             }
             return instance
         }
     }
-
-
 }

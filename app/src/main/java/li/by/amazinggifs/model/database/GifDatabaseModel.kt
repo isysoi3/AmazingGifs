@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "gif")
 class GifDatabaseModel(
-        @PrimaryKey var title: String = "",
-        var pathURL: String = ""
+    @PrimaryKey var pathURL: String = "",
+    var title: String = "",
+    var height: Int = 0
 )
